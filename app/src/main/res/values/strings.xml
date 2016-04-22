@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Vibration Signal Acquision System</string>
+    <string name="data_acq_process">数据采集与处理</string>
+    <string name="local_data_process">本地数据处理</string>
+    <string name="setting">设置</string>
+</resources>
