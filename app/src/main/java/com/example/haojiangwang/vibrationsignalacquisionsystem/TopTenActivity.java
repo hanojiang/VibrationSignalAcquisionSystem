@@ -20,7 +20,7 @@ public class TopTenActivity extends AppCompatActivity {
         index = IndexSort.dataSort(dataCopy);
         TextView tv = (TextView) findViewById(R.id.textView2);
         tv.setText("Top 10  " + "频率/Hz  " + "幅值\n");
-        for(int i=0;i<9;i++){
+        for(int i=0;i<10;i++){
             String s = (i+1) + "    "+index[i] * fs /outputData.length +  "    "+outputData[index[i]] + "\n";
             tv.append(s);
         }

@@ -124,7 +124,7 @@ public class LineChartActivity2 extends AppCompatActivity {
         for (int i = 0; i < count; i++) {
             // x轴显示的数据
             float xTemp = (i* fs /count);
-            float  valueTemp   = Math.round(xTemp * 100) /100;
+            float  valueTemp   = Math.round(xTemp * 1000) /1000;
             x.add("f:" + valueTemp);
         }
 
@@ -192,7 +192,7 @@ public class LineChartActivity2 extends AppCompatActivity {
             @Override
             public String getFormattedValue(float value, Entry entry,
                                             int dataSetIndex, ViewPortHandler viewPortHandler) {
-                float  valueTemp   =  (float)(Math.round(value*100))/100;
+                float  valueTemp   =  (float)(Math.round(value*1000))/1000;
 
 
                 String s = "y:" + valueTemp;

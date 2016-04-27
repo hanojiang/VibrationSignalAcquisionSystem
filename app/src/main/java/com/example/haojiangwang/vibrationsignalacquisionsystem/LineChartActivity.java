@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
@@ -14,6 +15,8 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import java.util.ArrayList;
@@ -25,12 +28,15 @@ public class LineChartActivity extends AppCompatActivity {
     private float [] data1;
     private int fs;
 
+    private TextView pointCor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_line_chart);
+        pointCor = (TextView) findViewById(R.id.pointCor);
         fs = this.getIntent().getIntExtra("theValueFS",0);
         data1 = this.getIntent().getFloatArrayExtra("dataValue");
 //        fs = this.getIntent().getFloatExtra(DATA_DRAWCHART1,0);
@@ -39,6 +45,23 @@ public class LineChartActivity extends AppCompatActivity {
         // 制作7个数据点（沿x坐标轴）
         LineData mLineData = makeLineData(data1.length);
         setChartStyle(chart, mLineData, Color.WHITE);//背景颜色
+        chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry entry, int i, Highlight highlight) {
+//                Toast.makeText(LineChartActivity.this,"" + entry.getVal() + "  "+entry.getXIndex(),Toast.LENGTH_LONG).show();
+                float xTemp = (entry.getXIndex() / (float)(fs));
+                float  valueTempX   =  (float)(Math.round(xTemp*1000))/1000;
+                float  valueTempY   =  (float)(Math.round(entry.getVal()*1000))/1000;
+
+                String s = "选择点坐标： " + "(" + valueTempX + "," + valueTempY +")";
+                pointCor.setText(s);
+            }
+
+            @Override
+            public void onNothingSelected() {
+
+            }
+        });
 
     }
     public void timeAnalys(View view){
@@ -127,7 +150,7 @@ public class LineChartActivity extends AppCompatActivity {
         for (int i = 0; i < count; i++) {
             // x轴显示的数据
             float xTemp = (i / (float)(fs));
-            float  valueTemp   =  (float)(Math.round(xTemp*100))/100;
+            float  valueTemp   =  (float)(Math.round(xTemp*1000))/1000;
             x.add("t:" + valueTemp);
         }
 
@@ -195,7 +218,7 @@ public class LineChartActivity extends AppCompatActivity {
             @Override
             public String getFormattedValue(float value, Entry entry,
                                             int dataSetIndex, ViewPortHandler viewPortHandler) {
-                float  valueTemp   =  (float)(Math.round(value*100))/100;
+                float  valueTemp   =  (float)(Math.round(value*1000))/1000;
 
 
                 String s = "y:" + valueTemp;
