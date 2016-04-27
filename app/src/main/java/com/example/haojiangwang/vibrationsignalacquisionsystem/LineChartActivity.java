@@ -89,7 +89,7 @@ public class LineChartActivity extends AppCompatActivity {
         // 如果mLineChart.setDrawGridBackground(false)，
         // 那么mLineChart.setGridBackgroundColor(Color.CYAN)将失效;
         mLineChart.setDrawGridBackground(true);
-        mLineChart.setGridBackgroundColor(Color.CYAN);
+        mLineChart.setGridBackgroundColor(Color.BLACK);
 
         // 触摸
         mLineChart.setTouchEnabled(true);
@@ -133,7 +133,7 @@ public class LineChartActivity extends AppCompatActivity {
         Legend mLegend = mLineChart.getLegend();
 
         mLegend.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
-        mLegend.setForm(Legend.LegendForm.SQUARE);// 样式
+        mLegend.setForm(Legend.LegendForm.LINE);// 样式
         mLegend.setFormSize(15.0f);// 字体
         mLegend.setTextColor(Color.BLUE);// 颜色
 
@@ -170,13 +170,13 @@ public class LineChartActivity extends AppCompatActivity {
         mLineDataSet.setLineWidth(1.0f);
 
         // 显示的圆形大小  修改过原5.0f
-        mLineDataSet.setCircleSize(0.5f);
+        mLineDataSet.setCircleSize(0.0f);
 
         // 折线的颜色
-        mLineDataSet.setColor(Color.DKGRAY);
+        mLineDataSet.setColor(Color.YELLOW);
 
         // 圆球的颜色
-        mLineDataSet.setCircleColor(Color.GREEN);
+//        mLineDataSet.setCircleColor(Color.GREEN);
 
         // 设置mLineDataSet.setDrawHighlightIndicators(false)后，
         // Highlight的十字交叉的纵横线将不会显示，
@@ -184,8 +184,8 @@ public class LineChartActivity extends AppCompatActivity {
         mLineDataSet.setDrawHighlightIndicators(true);
 
         // 按击后，十字交叉线的颜色
-        mLineDataSet.setHighLightColor(Color.RED);
-
+        mLineDataSet.setHighlightLineWidth(2.0f);
+        mLineDataSet.setHighLightColor(Color.GREEN);
         // 设置这项上显示的数据点的字体大小。
         mLineDataSet.setValueTextSize(10.0f);
 

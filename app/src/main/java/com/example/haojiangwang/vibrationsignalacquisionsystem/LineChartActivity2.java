@@ -52,7 +52,7 @@ public class LineChartActivity2 extends AppCompatActivity {
         LineChart chart = (LineChart) findViewById(R.id.chart);
 
         // 制作7个数据点（沿x坐标轴）
-        LineData mLineData = makeLineData(outputData.length);
+        LineData mLineData = makeLineData(outputData.length / 2);
         setChartStyle(chart, mLineData, Color.WHITE);
 
         chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
@@ -97,7 +97,7 @@ public class LineChartActivity2 extends AppCompatActivity {
         // 如果mLineChart.setDrawGridBackground(false)，
         // 那么mLineChart.setGridBackgroundColor(Color.CYAN)将失效;
         mLineChart.setDrawGridBackground(true);
-        mLineChart.setGridBackgroundColor(Color.CYAN);
+        mLineChart.setGridBackgroundColor(Color.BLACK);
 
         // 触摸
         mLineChart.setTouchEnabled(true);
@@ -131,7 +131,7 @@ public class LineChartActivity2 extends AppCompatActivity {
         Legend mLegend = mLineChart.getLegend();
 
         mLegend.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
-        mLegend.setForm(Legend.LegendForm.SQUARE);// 样式
+        mLegend.setForm(Legend.LegendForm.LINE);// 样式
         mLegend.setFormSize(15.0f);// 字体
         mLegend.setTextColor(Color.BLUE);// 颜色
 
@@ -147,7 +147,7 @@ public class LineChartActivity2 extends AppCompatActivity {
         ArrayList<String> x = new ArrayList<String>();
         for (int i = 0; i < count; i++) {
             // x轴显示的数据
-            float xTemp = (i* fs /count);
+            float xTemp = (i* fs /outputData.length);
             float  valueTemp   = Math.round(xTemp * 1000) /1000;
             x.add("f:" + valueTemp);
         }
@@ -155,7 +155,7 @@ public class LineChartActivity2 extends AppCompatActivity {
         // y轴的数据
         ArrayList<Entry> y = new ArrayList<Entry>();
         for (int i = 0; i < count; i++) {
-            float val = outputData[i]*2/count;
+            float val = outputData[i] *2/outputData.length;
             outputDataProcess[i] = val;
             Entry entry = new Entry(val, i);
             y.add(entry);
@@ -169,13 +169,13 @@ public class LineChartActivity2 extends AppCompatActivity {
         mLineDataSet.setLineWidth(1.0f);
 
         // 显示的圆形大小  修改过原5。0f
-        mLineDataSet.setCircleSize(0.5f);
+        mLineDataSet.setCircleSize(0.0f);
 
         // 折线的颜色
-        mLineDataSet.setColor(Color.DKGRAY);
+        mLineDataSet.setColor(Color.YELLOW);
 
         // 圆球的颜色
-        mLineDataSet.setCircleColor(Color.GREEN);
+//        mLineDataSet.setCircleColor(Color.GREEN);
 
         // 设置mLineDataSet.setDrawHighlightIndicators(false)后，
         // Highlight的十字交叉的纵横线将不会显示，
@@ -183,7 +183,8 @@ public class LineChartActivity2 extends AppCompatActivity {
         mLineDataSet.setDrawHighlightIndicators(true);
 
         // 按击后，十字交叉线的颜色
-        mLineDataSet.setHighLightColor(Color.RED);
+        mLineDataSet.setHighLightColor(Color.GREEN);
+        mLineDataSet.setHighlightLineWidth(2.0f);
 
         // 设置这项上显示的数据点的字体大小。
         mLineDataSet.setValueTextSize(10.0f);

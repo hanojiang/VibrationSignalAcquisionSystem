@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 public class TopTenActivity extends AppCompatActivity {
     private float[] outputData;
-    private float[] dataCopy;
+//    private float[] dataCopy;
     private int [] index;
     private float fs;
     @Override
@@ -15,9 +15,9 @@ public class TopTenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_time_details);
         outputData = this.getIntent().getFloatArrayExtra("outputDataTopTen");
         fs = this.getIntent().getFloatExtra("fs",0);
-        dataCopy = new float[outputData.length/2];
-        System.arraycopy(outputData,0,dataCopy,0,dataCopy.length/2);
-        index = IndexSort.dataSort(dataCopy);
+//        dataCopy = new float[outputData.length/2];
+//        System.arraycopy(outputData,0,dataCopy,0,dataCopy.length/2);
+        index = IndexSort.dataSort(outputData);
         TextView tv = (TextView) findViewById(R.id.textView2);
         tv.setText("Top 10  " + "频率/Hz  " + "幅值\n");
         for(int i=0;i<10;i++){
