@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
@@ -14,6 +15,8 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import java.util.ArrayList;
@@ -27,15 +30,19 @@ public class LineChartActivity2 extends AppCompatActivity {
 //    public static final String DATA_DRAWCHART2 = "com.example.haojiangwang.vibrationsignalacquisionsystem.linechartactivity2";
 
     private float [] outputData;
+    private float [] outputDataProcess;
     private float fs;
+    private TextView tv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_line_chart2);
+        tv = (TextView) findViewById(R.id.tvPointCor) ;
         fs = this.getIntent().getFloatExtra("fsValue",0);
         outputData = this.getIntent().getFloatArrayExtra("outputDataValue");
+        outputDataProcess = new float[outputData.length];
 //        outputData = this.getIntent().getFloatArrayExtra(DATA_DRAWCHART2);
         //        outputData = new float[data.length];
         //        FFT fft = new FFT();
@@ -48,10 +55,27 @@ public class LineChartActivity2 extends AppCompatActivity {
         LineData mLineData = makeLineData(outputData.length);
         setChartStyle(chart, mLineData, Color.WHITE);
 
+        chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry entry, int i, Highlight highlight) {
+                //                Toast.makeText(LineChartActivity.this,"" + entry.getVal() + "  "+entry.getXIndex(),Toast.LENGTH_LONG).show();
+                float xTemp = (entry.getXIndex() * fs /outputData.length);
+                float  valueTempX   = Math.round(xTemp * 1000) /1000;
+                float  valueTempY   =  (float)(Math.round(entry.getVal() * 1000))/1000;
+                String s = "选择点坐标： " + "(" + valueTempX + "," + valueTempY +")";
+                tv.setText(s);
+            }
+
+            @Override
+            public void onNothingSelected() {
+
+            }
+        });
+
     }
     public void topTenClick(View view){
         Intent intent = new Intent(LineChartActivity2.this, TopTenActivity.class);
-        intent.putExtra("outputDataTopTen",outputData);
+        intent.putExtra("outputDataTopTen",outputDataProcess);
         intent.putExtra("fs",fs);
         startActivity(intent);
 
@@ -132,6 +156,7 @@ public class LineChartActivity2 extends AppCompatActivity {
         ArrayList<Entry> y = new ArrayList<Entry>();
         for (int i = 0; i < count; i++) {
             float val = outputData[i]*2/count;
+            outputDataProcess[i] = val;
             Entry entry = new Entry(val, i);
             y.add(entry);
         }
