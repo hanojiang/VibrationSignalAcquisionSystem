@@ -29,6 +29,7 @@ public class LineChartActivity extends AppCompatActivity {
     private int fs;
 
     private TextView pointCor;
+    private LineChart mChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +41,12 @@ public class LineChartActivity extends AppCompatActivity {
         fs = this.getIntent().getIntExtra("theValueFS",0);
         data1 = this.getIntent().getFloatArrayExtra("dataValue");
 //        fs = this.getIntent().getFloatExtra(DATA_DRAWCHART1,0);
-        LineChart chart = (LineChart) findViewById(R.id.chart);
+        mChart = (LineChart) findViewById(R.id.chart);
 
         // 制作7个数据点（沿x坐标轴）
         LineData mLineData = makeLineData(data1.length);
-        setChartStyle(chart, mLineData, Color.WHITE);//背景颜色
-        chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+        setChartStyle(mChart, mLineData, Color.WHITE);//背景颜色
+        mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry entry, int i, Highlight highlight) {
 //                Toast.makeText(LineChartActivity.this,"" + entry.getVal() + "  "+entry.getXIndex(),Toast.LENGTH_LONG).show();
@@ -72,6 +73,9 @@ public class LineChartActivity extends AppCompatActivity {
         //        intent.putExtra(DateList.DATA,data);
         startActivity(intent);
     }
+    public void chartCut(View view){
+        mChart.saveToPath("chart1","/data");
+    }
 
     // 设置chart显示的样式
     private void setChartStyle(LineChart mLineChart, LineData lineData,
@@ -80,12 +84,13 @@ public class LineChartActivity extends AppCompatActivity {
         mLineChart.setDrawBorders(false);
 
         mLineChart.setDescription("时间t/s");// 数据描述
+        mLineChart.setDescriptionColor(Color.BLUE);
 
         // 如果没有数据的时候，会显示这个，类似listview的emtpyview
         mLineChart
                 .setNoDataTextDescription("如果传给MPAndroidChart的数据为空，那么你将看到这段文字。");
 
-        // 是否绘制背景颜色。
+        // 是否绘制背景颜色。绘图区域的背景颜色
         // 如果mLineChart.setDrawGridBackground(false)，
         // 那么mLineChart.setGridBackgroundColor(Color.CYAN)将失效;
         mLineChart.setDrawGridBackground(true);
@@ -123,7 +128,7 @@ public class LineChartActivity extends AppCompatActivity {
 
 
 
-        // 设置背景
+        // 设置背景，图标的背景，大背景
         mLineChart.setBackgroundColor(color);
 
         // 设置x,y轴的数据

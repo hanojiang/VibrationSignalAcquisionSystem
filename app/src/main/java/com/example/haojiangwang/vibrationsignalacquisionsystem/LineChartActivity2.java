@@ -33,6 +33,8 @@ public class LineChartActivity2 extends AppCompatActivity {
     private float [] outputDataProcess;
     private float fs;
     private TextView tv;
+    private LineChart mChart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,13 +51,13 @@ public class LineChartActivity2 extends AppCompatActivity {
         //        outputData =  fft.i2Sort(data,10);
         //
         //        outputData = fft.myFFT(outputData,10);
-        LineChart chart = (LineChart) findViewById(R.id.chart);
+        mChart = (LineChart) findViewById(R.id.chart);
 
         // 制作7个数据点（沿x坐标轴）
         LineData mLineData = makeLineData(outputData.length / 2);
-        setChartStyle(chart, mLineData, Color.WHITE);
+        setChartStyle(mChart, mLineData, Color.WHITE);
 
-        chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+        mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry entry, int i, Highlight highlight) {
                 //                Toast.makeText(LineChartActivity.this,"" + entry.getVal() + "  "+entry.getXIndex(),Toast.LENGTH_LONG).show();
@@ -79,6 +81,9 @@ public class LineChartActivity2 extends AppCompatActivity {
         intent.putExtra("fs",fs);
         startActivity(intent);
 
+    }
+    public void chartCut2(View view){
+        mChart.saveToPath("chart2","/data");
     }
 
     // 设置chart显示的样式
