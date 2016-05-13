@@ -49,7 +49,7 @@ public class DataAcquisionProcess extends AppCompatActivity implements SensorEve
     @InjectView(R.id.button10)
     Button mButton10;
 
-    private int acquisionFrequence;
+    public int acquisionFrequence;
     private int pointNumber;
     private float[] data;
     private float[] outputDate;
@@ -198,8 +198,8 @@ public class DataAcquisionProcess extends AppCompatActivity implements SensorEve
         float[] dataTemp = new float[outputDate.length];
         //此处添加dataTemp复制data数组中值，防止在排序后data数组值混乱，导致fft操作后重绘时域波形，发生错误。
         System.arraycopy(data, 0, dataTemp, 0, dataTemp.length);
-        outputDate = fft.i2Sort(dataTemp, (int) (Math.log(dataTemp.length) / Math.log(2)));
-        outputDate = fft.myFFT(outputDate, (int) (Math.log(dataTemp.length) / Math.log(2)));
+//        outputDate = fft.i2Sort(dataTemp, (int) (Math.log(dataTemp.length) / Math.log(2)));
+        outputDate = fft.myFFT(dataTemp, (int) (Math.log(dataTemp.length) / Math.log(2)));
     }
 
     private void drawChart2() {

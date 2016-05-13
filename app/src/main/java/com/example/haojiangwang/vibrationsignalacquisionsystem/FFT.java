@@ -44,11 +44,13 @@ public class FFT {
 
 
     public float[] myFFT(float[] xConv2, int m) {
+        float[] xConv3 = i2Sort(xConv2,m);
+
         int divBy; // divBy等分
         double[] Xr, Xi, Wr, Wi;
         float[] absY;// 分别表示：FFT结果的实部和虚部、旋转因子的实部和虚部
         double[] tempXr, tempXi; // 蝶形结果暂存器
-        int n = xConv2.length;
+        int n = xConv3.length;
         double pi = Math.PI;
         divBy = 1;
         Xr = new double[n];
@@ -59,7 +61,7 @@ public class FFT {
         Wi = new double[n / 2];
 
         for (int i = 0; i < n; i++) { // 初始化Xr、Xi，之所以这样初始化，是为了方便下面的蝶形结果暂存
-            Xr[i] = xConv2[i];
+            Xr[i] = xConv3[i];
             Xi[i] = 0;
         }
 

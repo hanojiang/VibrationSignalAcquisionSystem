@@ -35,19 +35,23 @@ public class TimeDetails extends AppCompatActivity {
         float clearanceFactor = ta.getClearanceFactor();
         float kurtorisValue = ta.getKurtorisValue();
 
-        TextView tv = (TextView) findViewById(R.id.textView2);
-        String string = "均值：" + ave +
-                "\n平均幅值" + absAve +
-                "\n均方根值" + ave2Root +
-                "\n方根幅值" + fangGengFu +
-                "\n方差" + fangCha +
-                "\n峰峰值" + ffValue +
-                "\n波形指标" + shapeFactor +
-                "\n脉冲指标" + impluseFactor +
-                "\n峰值指标" + cerstFactor +
-                "\n裕度指标" + clearanceFactor +
-                "\n峭度指标" + kurtorisValue ;
-        tv.setText(string);
+        TextView tv1 = (TextView) findViewById(R.id.textView8);
+        TextView tv2 = (TextView) findViewById(R.id.textView9);
+        String string =
+                "均    值：" + ave +
+                "\n平均幅值：" + absAve +
+                "\n均方根值：" + ave2Root +
+                "\n方根幅值：" + fangGengFu +
+                "\n方    差：" + fangCha +
+                "\n峰峰值：" + ffValue ;
+        String string2 =
+                        "波形指标：" + shapeFactor +
+                        "\n脉冲指标：" + impluseFactor +
+                        "\n峰值指标：" + cerstFactor +
+                        "\n裕度指标：" + clearanceFactor +
+                        "\n峭度指标：" + kurtorisValue ;
+        tv1.setText(string);
+        tv2.setText(string2);
 
     }
 }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -64,6 +65,9 @@ public class LineChartActivity extends AppCompatActivity {
             }
         });
 
+        MarkerView mv = new MyMarkerView(this,R.layout.content_marker_view,fs);
+        mChart.setMarkerView(mv);
+
     }
     public void timeAnalys(View view){
         Intent intent = new Intent(LineChartActivity.this, TimeDetails.class);
@@ -85,6 +89,8 @@ public class LineChartActivity extends AppCompatActivity {
 
         mLineChart.setDescription("时间t/s");// 数据描述
         mLineChart.setDescriptionColor(Color.BLUE);
+//        mLineChart.setDescriptionPosition(1200,1700);
+        mLineChart.setDescriptionTextSize(15);
 
         // 如果没有数据的时候，会显示这个，类似listview的emtpyview
         mLineChart
@@ -137,7 +143,7 @@ public class LineChartActivity extends AppCompatActivity {
         // 设置比例图标示，就是那个一组y的value的
         Legend mLegend = mLineChart.getLegend();
 
-        mLegend.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+        mLegend.setPosition(Legend.LegendPosition.RIGHT_OF_CHART_INSIDE);
         mLegend.setForm(Legend.LegendForm.LINE);// 样式
         mLegend.setFormSize(15.0f);// 字体
         mLegend.setTextColor(Color.BLUE);// 颜色

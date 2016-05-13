@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -7,17 +7,43 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
+              android:orientation="vertical"
                 tools:context="com.example.haojiangwang.vibrationsignalacquisionsystem.TimeDetails">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:text=""
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
-</RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="有量纲幅域诊断参数："
+        android:textColor="#f00"
+        android:textSize="20sp"
+        android:id="@+id/textView5"
+        />
+
+    <TextView
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:id="@+id/textView8"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="量纲为一幅域诊断参数："
+        android:textColor="#f00"
+        android:textSize="20sp"
+        android:id="@+id/textView7"
+        />
+
+    <TextView
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/textView9"
+        android:layout_weight="1"/>
+</LinearLayout>

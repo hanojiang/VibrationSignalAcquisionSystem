@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -73,6 +74,9 @@ public class LineChartActivity2 extends AppCompatActivity {
 
             }
         });
+
+        MarkerView mv = new MyMarkerView2(this,R.layout.content_marker_view,fs,outputData.length);
+        mChart.setMarkerView(mv);
 
     }
     public void topTenClick(View view){
