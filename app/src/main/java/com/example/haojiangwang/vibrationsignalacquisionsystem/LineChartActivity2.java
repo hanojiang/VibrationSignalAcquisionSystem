@@ -78,6 +78,8 @@ public class LineChartActivity2 extends AppCompatActivity {
         MarkerView mv = new MyMarkerView2(this,R.layout.content_marker_view,fs,outputData.length);
         mChart.setMarkerView(mv);
 
+        OutputData.outputData = outputDataProcess;
+
     }
     public void topTenClick(View view){
         Intent intent = new Intent(LineChartActivity2.this, TopTenActivity.class);

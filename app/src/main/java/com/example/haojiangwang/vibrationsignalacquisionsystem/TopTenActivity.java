@@ -12,16 +12,16 @@ public class TopTenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_time_details);
+        setContentView(R.layout.activity_frequence_details);
         outputData = this.getIntent().getFloatArrayExtra("outputDataTopTen");
         fs = this.getIntent().getFloatExtra("fs",0);
 //        dataCopy = new float[outputData.length/2];
 //        System.arraycopy(outputData,0,dataCopy,0,dataCopy.length/2);
         index = IndexSort.dataSort(outputData);
-        TextView tv = (TextView) findViewById(R.id.textView2);
-        tv.setText("Top 10  " + "频率/Hz  " + "幅值\n");
+        TextView tv = (TextView) findViewById(R.id.textView13);
+//        tv.setText("Top 10  " + "频率/Hz  " + "幅值\n");
         for(int i=0;i<10;i++){
-            String s = (i+1) + "    "+index[i] * fs /outputData.length +  "    "+outputData[index[i]] + "\n";
+            String s = (i+1) + "           "+index[i] * fs /outputData.length +  "            "+outputData[index[i]] + "\n";
             tv.append(s);
         }
     }

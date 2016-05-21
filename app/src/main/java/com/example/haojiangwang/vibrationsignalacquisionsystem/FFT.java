@@ -13,7 +13,7 @@ public class FFT {
         //        outputData = new double[inputData.length];
     }
 
-    public float[] i2Sort(float[] xConv2, int m) {
+    public static float[] i2Sort(float[] xConv2, int m) {
         int[] index = new int[xConv2.length]; // index数组用于，倒序索引
         int[] bits = new int[m];
         float[] temp = new float[xConv2.length];
@@ -43,7 +43,7 @@ public class FFT {
     }
 
 
-    public float[] myFFT(float[] xConv2, int m) {
+    public static float[] myFFT(float[] xConv2, int m) {
         float[] xConv3 = i2Sort(xConv2,m);
 
         int divBy; // divBy等分

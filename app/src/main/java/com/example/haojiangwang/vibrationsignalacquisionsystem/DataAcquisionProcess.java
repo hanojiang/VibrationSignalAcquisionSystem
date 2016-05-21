@@ -66,6 +66,9 @@ public class DataAcquisionProcess extends AppCompatActivity implements SensorEve
     private int j = 0;
     private File file;
 
+    //测试用变量
+    private long[] time = new long[1024];
+
 
     public int getAcquisionFrequence() {
         return acquisionFrequence;
@@ -139,7 +142,8 @@ public class DataAcquisionProcess extends AppCompatActivity implements SensorEve
     private void dataAcquision() {
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         Sensor accSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        mSensorManager.registerListener(this, accSensor, SensorManager.SENSOR_DELAY_FASTEST);
+        int fs = 1 / acquisionFrequence *1000000;
+        mSensorManager.registerListener(this, accSensor, fs);
         i = 0;
     }
 
@@ -153,11 +157,14 @@ public class DataAcquisionProcess extends AppCompatActivity implements SensorEve
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (i < data.length) {
+            time[i] = System.currentTimeMillis();
             float x = event.values[2];
             data[i] = x;
 
             i++;
         } else {
+            long timeTotle = time[time.length - 1] - time[0];
+            System.out.println(timeTotle + "共用时间");
             setTvNoContent("采集完毕");
             for (int i = 0; i < data.length; i++) {
                 data[i] = data[i] - gValue;
@@ -194,12 +201,12 @@ public class DataAcquisionProcess extends AppCompatActivity implements SensorEve
     }
 
     private void fftAction() {
-        FFT fft = new FFT();
+//        FFT fft = new FFT();
         float[] dataTemp = new float[outputDate.length];
         //此处添加dataTemp复制data数组中值，防止在排序后data数组值混乱，导致fft操作后重绘时域波形，发生错误。
         System.arraycopy(data, 0, dataTemp, 0, dataTemp.length);
 //        outputDate = fft.i2Sort(dataTemp, (int) (Math.log(dataTemp.length) / Math.log(2)));
-        outputDate = fft.myFFT(dataTemp, (int) (Math.log(dataTemp.length) / Math.log(2)));
+        outputDate = FFT.myFFT(dataTemp, (int) (Math.log(dataTemp.length) / Math.log(2)));
     }
 
     private void drawChart2() {
@@ -238,8 +245,9 @@ public class DataAcquisionProcess extends AppCompatActivity implements SensorEve
         File file3 = new File(file1, "data2.txt");
         FileOutputStream fos2 = new FileOutputStream(file3, false);
         //        OutputStreamWriter writer = new OutputStreamWriter(fos, "UTF-8");
-        for (int i = 0; i < data.length; i++) {
-            String temp = outputDate[i] + " ";
+        float[] od = OutputData.outputData;
+        for (int i = 0; i < od.length / 2; i++) {
+            String temp = od[i] + " ";
             fos2.write(temp.getBytes());
             fos2.write(c);
         }

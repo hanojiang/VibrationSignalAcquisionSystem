@@ -137,9 +137,10 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="时域数据存储"
+            android:text="数据存储"
             android:onClick="btnWriteSD"
             android:id="@+id/button8"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
