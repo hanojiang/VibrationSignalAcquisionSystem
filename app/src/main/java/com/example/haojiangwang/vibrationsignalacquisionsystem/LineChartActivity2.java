@@ -89,7 +89,7 @@ public class LineChartActivity2 extends AppCompatActivity {
 
     }
     public void chartCut2(View view){
-        mChart.saveToPath("chart2","/data");
+        mChart.saveToPath("频谱截图"+ System.currentTimeMillis(),"/data");
     }
 
     // 设置chart显示的样式
@@ -99,6 +99,8 @@ public class LineChartActivity2 extends AppCompatActivity {
         mLineChart.setDrawBorders(false);
 
         mLineChart.setDescription("频率/Hz");// 数据描述
+        mLineChart.setDescriptionColor(Color.BLUE);
+        mLineChart.setDescriptionTextSize(15);
 
         // 如果没有数据的时候，会显示这个，类似listview的emtpyview
         mLineChart
@@ -142,6 +144,7 @@ public class LineChartActivity2 extends AppCompatActivity {
         Legend mLegend = mLineChart.getLegend();
 
         mLegend.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+        mLegend.setPosition(Legend.LegendPosition.RIGHT_OF_CHART_INSIDE);
         mLegend.setForm(Legend.LegendForm.LINE);// 样式
         mLegend.setFormSize(15.0f);// 字体
         mLegend.setTextColor(Color.BLUE);// 颜色
@@ -177,13 +180,13 @@ public class LineChartActivity2 extends AppCompatActivity {
 
         // 用y轴的集合来设置参数
         // 线宽 原3.0f
-        mLineDataSet.setLineWidth(1.0f);
+        mLineDataSet.setLineWidth(1.5f);
 
         // 显示的圆形大小  修改过原5。0f
         mLineDataSet.setCircleSize(0.0f);
 
         // 折线的颜色
-        mLineDataSet.setColor(Color.YELLOW);
+        mLineDataSet.setColor(Color.GREEN);
 
         // 圆球的颜色
 //        mLineDataSet.setCircleColor(Color.GREEN);
@@ -194,8 +197,8 @@ public class LineChartActivity2 extends AppCompatActivity {
         mLineDataSet.setDrawHighlightIndicators(true);
 
         // 按击后，十字交叉线的颜色
-        mLineDataSet.setHighLightColor(Color.GREEN);
-        mLineDataSet.setHighlightLineWidth(2.0f);
+        mLineDataSet.setHighLightColor(Color.RED);
+        mLineDataSet.setHighlightLineWidth(1.0f);
 
         // 设置这项上显示的数据点的字体大小。
         mLineDataSet.setValueTextSize(10.0f);

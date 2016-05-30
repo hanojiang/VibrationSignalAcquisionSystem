@@ -67,7 +67,7 @@ public class DataAcquisionProcess extends AppCompatActivity implements SensorEve
     private File file;
 
     //测试用变量
-    private long[] time = new long[1024];
+//    private long[] time = new long[1024];
 
 
     public int getAcquisionFrequence() {
@@ -157,14 +157,14 @@ public class DataAcquisionProcess extends AppCompatActivity implements SensorEve
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (i < data.length) {
-            time[i] = System.currentTimeMillis();
+//            time[i] = System.currentTimeMillis();
             float x = event.values[2];
             data[i] = x;
 
             i++;
         } else {
-            long timeTotle = time[time.length - 1] - time[0];
-            System.out.println(timeTotle + "共用时间");
+//            long timeTotle = time[time.length - 1] - time[0];
+//            System.out.println(timeTotle + "共用时间");
             setTvNoContent("采集完毕");
             for (int i = 0; i < data.length; i++) {
                 data[i] = data[i] - gValue;
@@ -230,7 +230,7 @@ public class DataAcquisionProcess extends AppCompatActivity implements SensorEve
             //            TextView tv = (TextView) findViewById(R.id.textView);
             //            tv.setText("" + mkdirs);
         }
-        File file2 = new File(file1, "data1.txt");
+        File file2 = new File(file1, "data1" + System.currentTimeMillis() + ".txt");
 
         FileOutputStream fos1 = new FileOutputStream(file2, false);
         //        OutputStreamWriter writer = new OutputStreamWriter(fos, "UTF-8");
@@ -242,7 +242,7 @@ public class DataAcquisionProcess extends AppCompatActivity implements SensorEve
 
         fos1.close();
 
-        File file3 = new File(file1, "data2.txt");
+        File file3 = new File(file1, "data1" + System.currentTimeMillis() + ".txt");
         FileOutputStream fos2 = new FileOutputStream(file3, false);
         //        OutputStreamWriter writer = new OutputStreamWriter(fos, "UTF-8");
         float[] od = OutputData.outputData;
@@ -317,5 +317,9 @@ public class DataAcquisionProcess extends AppCompatActivity implements SensorEve
         }
     }
 
-
+    public void refreshClick(View view) {
+        finish();
+        Intent intent = new Intent(DataAcquisionProcess.this, DataAcquisionProcess.class);
+        startActivity(intent);
+    }
 }

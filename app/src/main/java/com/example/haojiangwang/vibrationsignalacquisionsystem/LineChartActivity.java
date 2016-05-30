@@ -46,7 +46,7 @@ public class LineChartActivity extends AppCompatActivity {
 
         // 制作7个数据点（沿x坐标轴）
         LineData mLineData = makeLineData(data1.length);
-        setChartStyle(mChart, mLineData, Color.WHITE);//背景颜色
+        setChartStyle(mChart, mLineData,Color.WHITE);//背景颜色
         mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry entry, int i, Highlight highlight) {
@@ -78,7 +78,7 @@ public class LineChartActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void chartCut(View view){
-        mChart.saveToPath("chart1","/data");
+        mChart.saveToPath("时域波形截图"+ System.currentTimeMillis(),"/data");
     }
 
     // 设置chart显示的样式
@@ -178,14 +178,13 @@ public class LineChartActivity extends AppCompatActivity {
 
         // 用y轴的集合来设置参数
         // 线宽 原3.0f
-        mLineDataSet.setLineWidth(1.0f);
+        mLineDataSet.setLineWidth(1.5f);
 
         // 显示的圆形大小  修改过原5.0f
         mLineDataSet.setCircleSize(0.0f);
 
         // 折线的颜色
-        mLineDataSet.setColor(Color.YELLOW);
-
+        mLineDataSet.setColor(Color.GREEN);
         // 圆球的颜色
 //        mLineDataSet.setCircleColor(Color.GREEN);
 
@@ -195,8 +194,8 @@ public class LineChartActivity extends AppCompatActivity {
         mLineDataSet.setDrawHighlightIndicators(true);
 
         // 按击后，十字交叉线的颜色
-        mLineDataSet.setHighlightLineWidth(2.0f);
-        mLineDataSet.setHighLightColor(Color.GREEN);
+        mLineDataSet.setHighlightLineWidth(1.0f);
+        mLineDataSet.setHighLightColor(Color.RED);
         // 设置这项上显示的数据点的字体大小。
         mLineDataSet.setValueTextSize(10.0f);
 

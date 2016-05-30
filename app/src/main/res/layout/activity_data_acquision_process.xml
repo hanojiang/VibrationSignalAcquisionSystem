@@ -28,6 +28,7 @@
                 android:id="@+id/textView"/>
 
             <EditText
+                android:text="100"
                 android:layout_height="wrap_content"
                 android:id="@+id/editText"
                 android:inputType="number"
@@ -51,6 +52,7 @@
             <EditText
                 android:layout_height="wrap_content"
                 android:id="@+id/editText2"
+                android:text="1024"
                 android:layout_weight="1"
                 android:inputType="number"/>
         </TableRow>
@@ -153,9 +155,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="浏览"
+                android:layout_weight="1"
                 android:onClick="browse"
-                android:layout_weight="1"/>
+                />
 
+            <Button
+                android:text="刷新"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button12"
+                android:layout_weight="1"
+                android:onClick="refreshClick"/>
 
 
         </LinearLayout>
