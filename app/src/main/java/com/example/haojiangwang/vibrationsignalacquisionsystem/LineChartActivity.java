@@ -78,7 +78,7 @@ public class LineChartActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void chartCut(View view){
-        mChart.saveToPath("时域波形截图"+ System.currentTimeMillis(),"/data");
+        mChart.saveToPath("时域波形截图"+ System.currentTimeMillis(),"/VSAS");
     }
 
     // 设置chart显示的样式

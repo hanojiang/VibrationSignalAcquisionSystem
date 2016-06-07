@@ -109,30 +109,71 @@ public class DataAcquisionProcess extends AppCompatActivity implements SensorEve
                 outputDate = new float[getPointNumber()];
                 break;
             case R.id.button3:
+                if(pointNumber == 0){
+                    errorDiolog("请先进行参数设置操作，才能进行校定采样");
+                    return;
+                }
                 setTvNoContent("已经开始采集重力加速度，请稍后。。。");
                 dataAcquision();
                 break;
             case R.id.button4:
+                if(pointNumber == 0){
+                    errorDiolog("请先进行参数设置操作，才能进行正式采样");
+                    return;
+                }
                 setTvNoContent("已经开始采样，请稍后。。。");
                 dataAcquision();
                 break;
             case R.id.button5:
-
+                if(pointNumber == 0){
+                    errorDiolog("请进行参数设置操作");
+                    return;
+                }
                 drawChart1();
                 break;
             case R.id.button6:
+                if(pointNumber == 0){
+                    errorDiolog("请进行参数设置操作");
+                    return;
+                }
                 fftAction();
                 setTvNoContent("快速傅里叶变换完成");
                 break;
             case R.id.button7:
+                if(pointNumber == 0){
+                    errorDiolog("请进行参数设置操作");
+                    return;
+                }
                 drawChart2();
                 break;
             case R.id.button10:
+                if(pointNumber == 0){
+                    errorDiolog("请先进行参数设置操作，才能进行校定操作");
+                    return;
+                }
                 setgValue();
                 setTvNoContent("校定成功，可以开始正式采样");
                 mTextView4.setText(gValue + "");
                 break;
         }
+    }
+    private void errorDiolog(String s){
+        AlertDialog.Builder builder = new AlertDialog.Builder(DataAcquisionProcess.this);
+        builder.setTitle("警告")
+                .setMessage(s)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
     }
 
     private void toastTest(int data) {
@@ -222,15 +263,19 @@ public class DataAcquisionProcess extends AppCompatActivity implements SensorEve
     }
 
     public void btnWriteSD(View view) throws IOException {
+        if(pointNumber == 0){
+            errorDiolog("请进行数据采集或数据导入");
+            return;
+        }
         File file1 = new File(Environment.getExternalStorageDirectory().getPath()
-                + File.separator + "data" + File.separator);
+                + File.separator + "VSAS" + File.separator);
         if (!file1.exists()) {
 
             boolean mkdirs = file1.mkdirs();
             //            TextView tv = (TextView) findViewById(R.id.textView);
             //            tv.setText("" + mkdirs);
         }
-        File file2 = new File(file1, "data1" + System.currentTimeMillis() + ".txt");
+        File file2 = new File(file1, "时域数据 " + System.currentTimeMillis() + ".txt");
 
         FileOutputStream fos1 = new FileOutputStream(file2, false);
         //        OutputStreamWriter writer = new OutputStreamWriter(fos, "UTF-8");
@@ -242,7 +287,7 @@ public class DataAcquisionProcess extends AppCompatActivity implements SensorEve
 
         fos1.close();
 
-        File file3 = new File(file1, "data1" + System.currentTimeMillis() + ".txt");
+        File file3 = new File(file1, "频域数据 " + System.currentTimeMillis() + ".txt");
         FileOutputStream fos2 = new FileOutputStream(file3, false);
         //        OutputStreamWriter writer = new OutputStreamWriter(fos, "UTF-8");
         float[] od = OutputData.outputData;
@@ -259,8 +304,12 @@ public class DataAcquisionProcess extends AppCompatActivity implements SensorEve
     }
 
     public void browse(View view) {
+        if(pointNumber == 0){
+            errorDiolog("请进行参数设置操作");
+            return;
+        }
         file = new File(Environment.getExternalStorageDirectory().getPath()
-                + File.separator + "data" + File.separator);
+                + File.separator + "VSAS" + File.separator);
         strings = file.list();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(DataAcquisionProcess.this);

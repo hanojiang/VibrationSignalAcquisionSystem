@@ -89,7 +89,7 @@ public class LineChartActivity2 extends AppCompatActivity {
 
     }
     public void chartCut2(View view){
-        mChart.saveToPath("频谱截图"+ System.currentTimeMillis(),"/data");
+        mChart.saveToPath("频谱截图"+ System.currentTimeMillis(),"/VSAS");
     }
 
     // 设置chart显示的样式
